@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SkiLodge": {
+      "commandName": "Project",
+      "commandLineArgs": "map.txt"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+C:\Users\Sergio Barrios\source\repos\SkiLodge\SkiLodge\bin\Debug\netcoreapp3.1\SkiLodge.exe
+C:\Users\Sergio Barrios\source\repos\SkiLodge\SkiLodge\bin\Debug\netcoreapp3.1\SkiLodge.deps.json
+C:\Users\Sergio Barrios\source\repos\SkiLodge\SkiLodge\bin\Debug\netcoreapp3.1\SkiLodge.runtimeconfig.json
+C:\Users\Sergio Barrios\source\repos\SkiLodge\SkiLodge\bin\Debug\netcoreapp3.1\SkiLodge.runtimeconfig.dev.json
+C:\Users\Sergio Barrios\source\repos\SkiLodge\SkiLodge\bin\Debug\netcoreapp3.1\SkiLodge.dll
+C:\Users\Sergio Barrios\source\repos\SkiLodge\SkiLodge\bin\Debug\netcoreapp3.1\SkiLodge.pdb
+C:\Users\Sergio Barrios\source\repos\SkiLodge\SkiLodge\obj\Debug\netcoreapp3.1\SkiLodge.csprojAssemblyReference.cache
+C:\Users\Sergio Barrios\source\repos\SkiLodge\SkiLodge\obj\Debug\netcoreapp3.1\SkiLodge.AssemblyInfoInputs.cache
+C:\Users\Sergio Barrios\source\repos\SkiLodge\SkiLodge\obj\Debug\netcoreapp3.1\SkiLodge.AssemblyInfo.cs
+C:\Users\Sergio Barrios\source\repos\SkiLodge\SkiLodge\obj\Debug\netcoreapp3.1\SkiLodge.csproj.CoreCompileInputs.cache
+C:\Users\Sergio Barrios\source\repos\SkiLodge\SkiLodge\obj\Debug\netcoreapp3.1\SkiLodge.dll
+C:\Users\Sergio Barrios\source\repos\SkiLodge\SkiLodge\obj\Debug\netcoreapp3.1\SkiLodge.pdb
+C:\Users\Sergio Barrios\source\repos\SkiLodge\SkiLodge\obj\Debug\netcoreapp3.1\SkiLodge.genruntimeconfig.cache
