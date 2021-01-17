@@ -20,37 +20,53 @@ namespace SkiLodge
                     recordedLengthMatrix.matrix = GenerateEmptyMatrix(mountainHeightMatrix);
                     recordedLengthMatrix.height = mountainHeightMatrix.height;
                     recordedLengthMatrix.width = mountainHeightMatrix.width;
-                    int i = 0;
+                    int y = 0;
                     int longestSlopeLength = 0;
-                    int highestCoord = 0;
                     coord longestSlopeCoords = new coord();
-                    while (i < mountainHeightMatrix.height) 
+                    while (y < mountainHeightMatrix.height) 
                     {
-                        int j = 0;
-                        while (j < mountainHeightMatrix.width)
+                        int x = 0;
+                        while (x < mountainHeightMatrix.width)
                         {
-                            int slopeLength = FindLongestSlope(mountainHeightMatrix, recordedLengthMatrix, i, j);
-                            int mountainHeight = mountainHeightMatrix.matrix[i][j];
-                            if ((slopeLength >= longestSlopeLength)&&(mountainHeight >= highestCoord)) 
+                            int slopeLength = FindLongestSlope(mountainHeightMatrix, recordedLengthMatrix, x, y);
+                            int mountainHeight = mountainHeightMatrix.matrix[y][x];
+                            if (slopeLength > longestSlopeLength)
                             {
                                 longestSlopeLength = slopeLength;
-                                longestSlopeCoords.x = i;
-                                longestSlopeCoords.y = j;
+                                longestSlopeCoords.x = x;
+                                longestSlopeCoords.y = y;
                             }
-                            j++;
+                            else if (slopeLength == longestSlopeLength)
+                            {
+                                if (mountainHeightMatrix.matrix[longestSlopeCoords.y][longestSlopeCoords.x] < mountainHeight)
+                                {
+                                    longestSlopeLength = slopeLength;
+                                    longestSlopeCoords.x = x;
+                                    longestSlopeCoords.y = y;
+                                }
+                            }
+                            x++;
                         }
-                        i++;
+                        y++;
                     }
                     Console.WriteLine("The longest slope starts at the coordinate: ");
                     Console.WriteLine("x: " + longestSlopeCoords.x + " y: " + longestSlopeCoords.y);
                     Console.WriteLine("The slope goes through the following coordinates: ");
                     List<coord> longestPath = recordedLengthMatrix.paths[new coord() { x = longestSlopeCoords.x, y = longestSlopeCoords.y }];
-                    i = longestPath.Count -1;
+                    int i = longestPath.Count -1;
+                    int lowestPoint = mountainHeightMatrix.matrix[longestPath[0].y][longestPath[0].x];
+                    int highestPoint = mountainHeightMatrix.matrix[longestPath[i].y][longestPath[i].x];
                     while (i >= 0)
                     {
                         Console.WriteLine("x: " + longestPath[i].x + " y: " + longestPath[i].y);
+                        Console.WriteLine("height: " + mountainHeightMatrix.matrix[longestPath[i].y][longestPath[i].x]);
+                        Console.WriteLine();
                         i--;
                     }
+                    Console.WriteLine("HighestPoint: " + highestPoint + " LowestPoint: " + lowestPoint);
+                    int drop = (highestPoint - lowestPoint);
+                    Console.WriteLine("Drop: "+ drop);
+                    Console.WriteLine("Longest Path: " + longestSlopeLength);
                     Console.WriteLine();
                     Console.WriteLine();
                 }
