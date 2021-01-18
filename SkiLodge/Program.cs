@@ -209,29 +209,67 @@ namespace SkiLodge
                 }
                 int[] directionalValues = new int[] { leftValue, upValue, rightValue, downValue };
                 int maxLength = directionalValues.Max();
+                IEnumerable<int> indices = directionalValues.Select((x, i) => new { Index = i, Value = x })
+                                               .Where(x => x.Value == maxLength)
+                                               .Select(x => x.Index);
+                int chosenDirection = -1;
+                if (indices.Count() > 1)
+                {
+                    int lowestPath = -1;
+                    foreach (int direction in indices) 
+                    {
+                        int height = -1;
+                        if ((direction == 0)&&(xCoordinate > 0))
+                        {
+                            height = mountainHeightMatrix.matrix[yCoordinate][(xCoordinate - 1)];
+                        }
+                        else if ((direction == 1)&&(yCoordinate > 0))
+                        {
+                            height = mountainHeightMatrix.matrix[(yCoordinate - 1)][xCoordinate];
+                        }
+                        else if ((direction == 2)&&(xCoordinate < (recordedLengthMatrix.width - 1)))
+                        {
+                            height = mountainHeightMatrix.matrix[yCoordinate][(xCoordinate + 1)];
+                        }
+                        else if ((direction == 3)&& (yCoordinate < (recordedLengthMatrix.height - 1)))
+                        {
+                            height = mountainHeightMatrix.matrix[(yCoordinate + 1)][xCoordinate];
+                        }
+                        if ((lowestPath == -1) && (height != -1))
+                        {
+                            chosenDirection = direction;
+                            lowestPath = height;
+                        }
+                        else if ((height <= lowestPath)&&(height != -1))
+                        {
+                            chosenDirection = direction;
+                            lowestPath = height;
+                        }
+                    }
+                }
                 int currentMemberLength = maxLength + 1;
                 recordedLengthMatrix.matrix[yCoordinate][xCoordinate] = currentMemberLength;
                 if (maxLength > 0)
                 {
-                    if (leftValue == maxLength)
+                    if (((leftValue == maxLength)&&(chosenDirection == -1))||(chosenDirection == 0))
                     {
                         List<coord> currentMatrixPath = new List<coord>(recordedLengthMatrix.paths[new coord() { x = (xCoordinate - 1), y = yCoordinate }]);
                         currentMatrixPath.Add(new coord() { x = xCoordinate, y = yCoordinate });
                         recordedLengthMatrix.paths.Add(new coord() { x = xCoordinate, y = yCoordinate }, currentMatrixPath);
                     }
-                    else if (upValue == maxLength)
+                    else if (((upValue == maxLength) && (chosenDirection == -1)) || (chosenDirection == 1))
                     {
                         List<coord> currentMatrixPath = new List<coord>(recordedLengthMatrix.paths[new coord() { x = xCoordinate, y = (yCoordinate - 1)}]);
                         currentMatrixPath.Add(new coord() { x = xCoordinate, y = yCoordinate });
                         recordedLengthMatrix.paths.Add(new coord() { x = xCoordinate, y = yCoordinate }, currentMatrixPath);
                     }
-                    else if (rightValue == maxLength)
+                    else if (((rightValue == maxLength) && (chosenDirection == -1)) || (chosenDirection == 2))
                     {
                         List<coord> currentMatrixPath = new List<coord>(recordedLengthMatrix.paths[new coord() { x = (xCoordinate + 1), y = yCoordinate}]);
                         currentMatrixPath.Add(new coord() { x = xCoordinate, y = yCoordinate });
                         recordedLengthMatrix.paths.Add(new coord() { x = xCoordinate, y = yCoordinate }, currentMatrixPath);
                     }
-                    else if (downValue == maxLength)
+                    else if (((downValue == maxLength) && (chosenDirection == -1)) || (chosenDirection == 3))
                     {
                         List<coord> currentMatrixPath = new List<coord>(recordedLengthMatrix.paths[new coord() { x = xCoordinate, y = (yCoordinate + 1) }]);
                         currentMatrixPath.Add(new coord() { x = xCoordinate, y = yCoordinate });
