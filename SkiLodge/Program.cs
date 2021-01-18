@@ -38,7 +38,17 @@ namespace SkiLodge
                             }
                             else if (slopeLength == longestSlopeLength)
                             {
-                                if (mountainHeightMatrix.matrix[longestSlopeCoords.y][longestSlopeCoords.x] < mountainHeight)
+                                List<coord> currentPath = recordedLengthMatrix.paths[new coord() { x = x, y = y }];
+                                int currentPathLowestPoint = mountainHeightMatrix.matrix[currentPath[0].y][currentPath[0].x];
+                                int currentPathHighestPoint = mountainHeightMatrix.matrix[currentPath[currentPath.Count - 1].y][currentPath[currentPath.Count - 1].x];
+                                int currentDrop = currentPathHighestPoint - currentPathLowestPoint;
+
+                                List<coord> previousPath = recordedLengthMatrix.paths[new coord() { x = longestSlopeCoords.x, y = longestSlopeCoords.y }];
+                                int previousPathLowestPoint = mountainHeightMatrix.matrix[previousPath[0].y][previousPath[0].x];
+                                int previousPathHighestPoint = mountainHeightMatrix.matrix[previousPath[previousPath.Count - 1].y][previousPath[previousPath.Count - 1].x];
+                                int previousDrop = previousPathHighestPoint - previousPathLowestPoint;
+
+                                if ((previousDrop) < currentDrop)
                                 {
                                     longestSlopeLength = slopeLength;
                                     longestSlopeCoords.x = x;
@@ -159,7 +169,7 @@ namespace SkiLodge
             {
                 //Check left
                 int leftValue = 0;
-                if ((xCoordinate - 1) > 0)
+                if ((xCoordinate - 1) >= 0)
                 {
                     int leftMemberHeight = mountainHeightMatrix.matrix[yCoordinate][(xCoordinate - 1)];
                     if (leftMemberHeight < currentMemberHeight)
@@ -169,7 +179,7 @@ namespace SkiLodge
                 }
                 //Check up
                 int upValue = 0;
-                if ((yCoordinate - 1) > 0)
+                if ((yCoordinate - 1) >= 0)
                 {
                     int upMemberHeight = mountainHeightMatrix.matrix[(yCoordinate - 1)][xCoordinate];                    
                     if (upMemberHeight < mountainHeightMatrix.matrix[yCoordinate][xCoordinate])
